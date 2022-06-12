@@ -25,8 +25,6 @@ class AdminServiceProvider extends ServiceProvider
     public function boot()
     {
         $moduleName = basename(dirname(__DIR__ ,levels:1));
-    //    dd($moduleName);
-        config([File::getRequire(loadConfigs($moduleName,'auth'))]);
         $this->loadRoutesFrom(loadRoutes($moduleName, 'web'));
         //$this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadViewsFrom(loadViews($moduleName),$moduleName);

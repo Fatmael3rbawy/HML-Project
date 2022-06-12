@@ -15,7 +15,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin.auth:admin');
+        $this->middleware('admin:admin');
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryAction $action,StoreCategoryRequest $request)
     {
        $action->handel($request);
-       return redirect(route('categories.index'))->with('message','Category created successfully');
+       return redirect(route('admin.categories.index'))->with('message','Category created successfully');
 
     }
 
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryAction $action ,UpdateCategoryRequest $request, $id)
     {
         $action->handel($request ,$id);
-        return redirect(route('categories.index'))->with('message','Category updated successfully');
+        return redirect(route('admin.categories.index'))->with('message','Category updated successfully');
     }
 
     /**

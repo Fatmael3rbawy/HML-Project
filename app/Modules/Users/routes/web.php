@@ -16,10 +16,10 @@ use Users\Http\Controllers\LoginController;
 */
 
 
-Route::group(['namespace' => 'Users\Http\Controllers', 'middleware' => 'web'], function () {
+Route::group(['namespace' => 'Users\Http\Controllers', 'middleware' => 'web' ,'as' => 'user.'], function () {
 
     Route::middleware('guest')->group(function () {
-        Route::get('/', [LoginController::class, 'create'])->name('login');
+        Route::get('login', [LoginController::class, 'create'])->name('login');
         Route::post('login', [LoginController::class, 'store']);
     });
 

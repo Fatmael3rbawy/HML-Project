@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('supplier.auth:supplier');
+        $this->middleware('supplier:supplier');
     }
     /**
      * Display a listing of the resource.
@@ -48,7 +48,7 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request ,StoreProductAction $action)
     {
        $action->handel($request);
-        return redirect(route('products.index'))->with('message', 'product created successfully');
+        return redirect(route('supplier.products.index'))->with('message', 'product created successfully');
     }
 
     /**
@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, $id ,UpdateProductAction $action)
     {
        $action->handel($request ,$id);
-        return redirect(route('products.index'))->with('message', 'product updated successfully');
+        return redirect(route('supplier.products.index'))->with('message', 'product updated successfully');
     }
 
     /**

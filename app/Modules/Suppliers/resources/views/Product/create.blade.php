@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="container-fluid py-4">
-        <form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('supplier.products.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="row mt-4">

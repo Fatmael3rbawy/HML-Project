@@ -23,7 +23,7 @@
                             </div>
                             <div class="ms-auto my-auto mt-lg-0 mt-4">
                                 <div class="ms-auto my-auto">
-                                    <a href="{{ route('products.create') }}"
+                                    <a href="{{ route('supplier.products.create') }}"
                                         class="btn bg-gradient-primary btn-sm mb-0">+&nbsp;
                                         New
                                         Product</a>
@@ -97,14 +97,14 @@
                                             <td class="text-sm ">
                                                 <div class="flex">
                                                    
-                                                    <a href="{{ route('products.edit', $product->id) }}" class="mx-3"
+                                                    <a href="{{ route('supplier.products.edit', $product->id) }}" class="mx-3"
                                                         data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                                                         <i class="fas fa-user-edit text-secondary"></i>
                                                     </a>
                                                     
                                                     <a data-bs-toggle="tooltip" data-bs-original-title="Delete category">
                                                         <form method="POST"
-                                                            action="{{ route('products.destroy', $product->id) }}">
+                                                            action="{{ route('supplier.products.destroy', $product->id) }}">
                                                             @csrf
                                                             <input name="_method" type="hidden" value="DELETE">
                                                              <button type="submit" data-bs-toggle="tooltip"

@@ -102,7 +102,7 @@
                         </div>
                        @endif
                         <div class="card-body">
-                            <form role="form" class="text-start" method="POST" action="{{ route('login') }}">
+                            <form role="form" class="text-start" method="POST" action="{{ route('user.login') }}">
                                 @csrf
                                 {{ csrf_field() }}
                                 <div class="mb-3">

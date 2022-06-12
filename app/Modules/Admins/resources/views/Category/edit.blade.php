@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="container-fluid py-4">
-        <form method="POST" action="{{ route('categories.update', $category->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.categories.update', $category->id) }}" enctype="multipart/form-data">
             @method('put')
             @csrf
             @method('PUT')

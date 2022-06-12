@@ -24,7 +24,7 @@
                             </div>
                             <div class="ms-auto my-auto mt-lg-0 mt-4">
                                 <div class="ms-auto my-auto">
-                                    <a href="{{ route('categories.create') }}"
+                                    <a href="{{ route('admin.categories.create') }}"
                                         class="btn bg-gradient-primary btn-sm mb-0">+&nbsp;
                                         New
                                         Category</a>
@@ -99,13 +99,13 @@
                                             <td class="text-sm ">
                                                 <div class="flex">
                                                     
-                                                    <a href="{{ route('categories.edit', $category->id) }}" class="mx-3"
+                                                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="mx-3"
                                                         data-bs-toggle="tooltip" data-bs-original-title="Edit category">
                                                         <i class="fas fa-user-edit text-secondary"></i>
                                                     </a>
                                                     <a data-bs-toggle="tooltip" data-bs-original-title="Delete category">
                                                         <form method="POST"
-                                                            action="{{ route('categories.destroy', $category->id) }}">
+                                                            action="{{ route('admin.categories.destroy', $category->id) }}">
                                                             @csrf
                                                             <input name="_method" type="hidden" value="DELETE">
                                                              <button type="submit" data-bs-toggle="tooltip"

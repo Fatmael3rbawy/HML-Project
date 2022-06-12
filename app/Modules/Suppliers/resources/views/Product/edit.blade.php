@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="container-fluid py-4">
-        <form method="post" action="{{ route('products.update',$product->id) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('supplier.products.update',$product->id) }}" enctype="multipart/form-data">
             @csrf
             @method('put')
 

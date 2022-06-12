@@ -9,10 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('supplier.auth:supplier');
-    }
+    
     /**
      * Display the login view.
      *
@@ -41,6 +38,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('supplier')->logout();
-        return redirect('/supplier');
+        return redirect(route('supplier.login'));
     }
 }

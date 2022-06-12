@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['namespace' => 'Suppliers\Http\Controllers', 'prefix' => 'supplier' ,'middleware' => 'web'], function () {
+Route::group(['namespace' => 'Suppliers\Http\Controllers', 'prefix' => 'supplier' ,'middleware' => 'web' ,'as' => 'supplier.'], function () {
 
     Route::middleware('guest')->group(function () {
         Route::get('login', [LoginController::class, 'create'])->name('login');
         Route::post('login', [LoginController::class, 'store']);
     });
 
-    Route::middleware('supplier.auth:supplier')->group(function () {
+    Route::middleware('supplier:supplier')->group(function () {
 
         Route::get('/dashboard', function () {
             return view('Suppliers::dashboard');

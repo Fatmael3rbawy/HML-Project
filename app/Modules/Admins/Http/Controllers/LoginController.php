@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin.auth:admin');
-    }
+    
     /**
      * Display the login view.
      *
@@ -34,7 +31,6 @@ class LoginController extends Controller
         $remember_me = $request->has('rememberme') ? true : false;
 
         if (Auth::guard('admin')->attempt($credentials ,$remember_me)) {
-            dd(1);
             return redirect('/admin/dashboard');
         }
 
@@ -44,6 +40,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect('/admin');
+        return redirect(route('admin.login'));
     }
 }

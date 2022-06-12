@@ -20,13 +20,12 @@ class LoginController extends Controller
     }
 
    
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-      //  $credentials = $request->validated();
+       $credentials = $request->validated();
         $remember_me = $request->has('rememberme') ? true : false;
-        $credentials = $request->only('email','password');
         if (Auth::attempt($credentials ,$remember_me)) {
-            return redirect(route('home'));
+            return redirect(route('user.home'));
         }
 
         return back()->with('error', ' Sorry, Your data is wrong');
@@ -35,6 +34,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/');
+        return redirect(route('user.login'));
     }
 }
