@@ -1,12 +1,15 @@
 <?php
 
 namespace Admins\Http\Controllers;
+
+use Admins\Actions\DeleteCategoryAction;
 use Illuminate\Http\Request;
+use Admins\Actions\StoreCategoryAction;
+use Admins\Actions\UpdateCategoryAction;
 use Admins\Http\Requests\Category\StoreCategoryRequest;
 use Admins\Http\Requests\Category\UpdateCategoryRequest;
 use Admins\Models\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -21,7 +24,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $categories = Category::orderby('id','desc')->paginate(10);
         return view('Admins::Category.index',compact('categories'));
 
@@ -43,24 +46,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryAction $action,StoreCategoryRequest $request)
     {
-       
-    //   dd( $request->validated() );
+       $action->handel($request);
+       return redirect(route('categories.index'))->with('message','Category created successfully');
 
-       //store image in public/images/categories
-       $image = $request->file('image');
-       $ext = $image->getClientOriginalExtension();
-       $image_name = "category" . uniqid() . ".jpg";
-       $image->move(public_path('images/Categories'), $image_name);
-
-      Category::create([
-           'name'=>$request->name,
-           'image'=> $image_name,
-           'admin_id'=> Auth::guard('admin')->user()->id
-       ]
-        );
-        return redirect(route('categories.index'))->with('message','Category created successfully');
     }
 
     /**
@@ -93,29 +83,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, $id)
+    public function update(UpdateCategoryAction $action ,UpdateCategoryRequest $request, $id)
     {
-        $category = Category::find($id);
-
-        $image_name = $category->image;
-        // check if admin upload image or not
-        if ($request->hasFile('image')) {
-            // check if category has image or not
-            if ($image_name !== '' ) {
-                unlink(public_path('images/categories/') . $image_name);
-            }
-            //store category image in public/images/categories
-            $image = $request->file('image');
-            $ext = $image->getClientOriginalExtension();
-            $image_name = "category" . uniqid() . ".$ext";
-            $image->move(public_path('images/categories'), $image_name);
-        }
-    
-        $category->update([
-           'name'=> $request->name,
-           'image'=> $image_name
-        ]);
-
+        $action->handel($request ,$id);
         return redirect(route('categories.index'))->with('message','Category updated successfully');
     }
 
@@ -125,11 +95,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $category = Category::find($id);
-        unlink(public_path('images/categories/') . $category->image);
-        $category->delete();
+    public function destroy($id ,DeleteCategoryAction $action)
+    {   
+       $action->handel($id);
         return back()->with('message', 'The category  deleted successfully');
 
     }
