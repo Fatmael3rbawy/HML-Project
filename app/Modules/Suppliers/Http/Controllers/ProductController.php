@@ -9,6 +9,9 @@ use Suppliers\Http\Requests\Product\UpdateProductRequest;
 use Suppliers\Models\product;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Suppliers\Actions\DeleteProductAction;
+use Suppliers\Actions\StoreProductAction;
+use Suppliers\Actions\UpdateProductAction;
 use Suppliers\Models\Image;
 
 class ProductController extends Controller
@@ -45,30 +48,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request ,StoreProductAction $action)
     {
-        $product = Product::create([
-            "name" => $request->name,
-            'price' => $request->price,
-            'description' => $request->description,
-            'category_id' => $request->category,
-            'supplier_id' => Auth::guard('supplier')->user()->id
-        ]);
-
-        if ($request->hasfile('images')) {
-            $images = $request->file('images');
-            foreach ($images as $image) {
-                $ext = $image->getClientOriginalExtension();
-                $image_name = "product" . uniqid() . $ext;
-                $image->move(public_path('images/products'), $image_name);
-
-                Image::create([
-                    'path' =>  $image_name,
-                    'product_id' => $product->id
-                ]);
-            }
-        }
-
+       $action->handel($request);
         return redirect(route('products.index'))->with('message', 'product created successfully');
     }
 
@@ -103,43 +85,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, $id ,UpdateProductAction $action)
     {
-        $product = Product::find($id);
-
-        $images = $product->images;
-        // check if admin upload images or not
-        if ($request->hasFile('images')) {
-            // check if product has images or not
-            if ($images->isNotEmpty()) {
-
-                foreach ($images as  $image) {
-                    //delete images from products folder
-                    unlink(public_path('images/products/') . $image->path);
-                    //delete images from images table (database)
-                    $image->delete();
-                }
-            }
-            //store product images in public/images/products
-            $images = $request->file('images');
-            foreach ($images as $image) {
-                $ext = $image->getClientOriginalExtension();
-                $image_name = "product" . uniqid() . $ext;
-                $image->move(public_path('images/products'), $image_name);
-                //store product images inimages table (database)
-                Image::create([
-                    'path' =>  $image_name,
-                    'product_id' => $id
-                ]);
-            }
-        }
-
-        $product->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'description' => $request->description,
-        ]);
-
+       $action->handel($request ,$id);
         return redirect(route('products.index'))->with('message', 'product updated successfully');
     }
 
@@ -149,15 +97,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id ,DeleteProductAction $action)
     {
-        $product = Product::find($id);
-        $images = $product->images;
-        //dd($images);
-        foreach ($images as  $image) {
-            unlink(public_path('images/products/') . $image->path);
-        }
-        $product->delete();
+        $action->handel($id);
         return back()->with('message', 'The product  deleted successfully');
     }
 }
