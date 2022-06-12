@@ -1,7 +1,7 @@
 <?php 
 
 namespace Suppliers\Actions;
-use Suppliers\Models\product;
+use Suppliers\Models\Product;
 use Suppliers\Models\Image;
 use Suppliers\Http\Requests\Product\UpdateProductRequest;
 
