@@ -3,16 +3,13 @@
 namespace Suppliers\Http\Controllers;
 
 use Admins\Models\Category;
-use Illuminate\Http\Request;
 use Suppliers\Http\Requests\Product\StoreProductRequest;
 use Suppliers\Http\Requests\Product\UpdateProductRequest;
 use Suppliers\Models\product;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Suppliers\Actions\DeleteProductAction;
 use Suppliers\Actions\StoreProductAction;
 use Suppliers\Actions\UpdateProductAction;
-use Suppliers\Models\Image;
+use Suppliers\Http\Services\DeleteProductService;
 
 class ProductController extends Controller
 {
@@ -97,9 +94,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id ,DeleteProductAction $action)
+    public function destroy($id ,DeleteProductService $service)
     {
-        $action->handel($id);
+        $service->handel($id);
         return back()->with('message', 'The product  deleted successfully');
     }
 }

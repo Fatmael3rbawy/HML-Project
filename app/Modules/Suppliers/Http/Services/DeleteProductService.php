@@ -1,11 +1,10 @@
 <?php 
 
-namespace Suppliers\Actions;
-
+namespace Suppliers\Http\Services;
 use Suppliers\Models\Product;
 
-class DeleteProductAction
-{
+class DeleteProductService
+{  
     public function handel($id)
     {
         

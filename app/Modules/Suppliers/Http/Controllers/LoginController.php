@@ -24,14 +24,14 @@ class LoginController extends Controller
     }
 
     
-    public function store(SupplierLoginRequest $request)
+    public function store(SupplierLoginRequest $request )
     {
         $credentials = $request->validated();
        // $credentials = $request->only('email', 'password');; 
         $remember_me = $request->has('rememberme') ? true : false;
 
         if (Auth::guard('supplier')->attempt($credentials ,$remember_me)) {
-            dd(0);
+            
             return redirect('/supplier/dashboard');
         }
 
