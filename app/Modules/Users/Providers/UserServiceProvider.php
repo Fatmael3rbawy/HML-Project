@@ -26,6 +26,7 @@ class UserServiceProvider extends ServiceProvider
     {
         $moduleName = basename(dirname(__DIR__ ,levels:1));
         $this->loadRoutesFrom(loadRoutes($moduleName, 'web'));
+        $this->loadRoutesFrom(loadRoutes($moduleName, 'api'));
         $this->loadViewsFrom(loadViews($moduleName),$moduleName);
         $this->loadMigrationsFrom(loadMigrations($moduleName));
     }
