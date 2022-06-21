@@ -199,6 +199,7 @@ return [
         Suppliers\Providers\SupplierServiceProvider::class,
         Users\Providers\UserServiceProvider::class,
         Users\Providers\RouteServiceProvider::class,
+
     ],
 
     /*

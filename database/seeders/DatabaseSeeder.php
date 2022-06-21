@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Admins\Seeders\AdminSeeder;
+use Database\Admins\Seeders\NewsSeeder;
 use Database\Suppliers\Seeders\SupplierSeeder;
 use Database\Users\Seeders\UserSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -27,7 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             SupplierSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            NewsSeeder::class
         ]);
     }
 }

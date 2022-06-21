@@ -26,6 +26,21 @@
     @include('Admins::includes.sidebar')
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     @include('Admins::includes.header')
+    <br>
+    @if (session('success'))
+        <div class='alert alert-success'>
+            <h6>
+                <center>{{ session('success') }}</center>
+            </h6>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class='alert alert-danger'>
+            <h6>
+                <center>{{ session('error') }}</center>
+            </h6>
+        </div>
+    @endif
     @yield('content')
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     @include('Admins::includes.footer')
@@ -141,6 +156,7 @@
     <script src="{{asset('../../assets/js/plugins/chartjs.min.js')}}"></script>
     <script src="{{asset('../../assets/js/plugins/threejs.js')}}"></script>
     <script src="{{asset('../../assets/js/plugins/orbit-controls.js')}}"></script>
+    @stack('scripts')
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 

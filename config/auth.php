@@ -50,6 +50,7 @@ return [
             'driver' => 'session',
             'provider' => 'suppliers',
         ],
+        
     ],
 
 
@@ -90,7 +91,8 @@ return [
         'suppliers' => [
             'driver' => 'eloquent',
             'model' => Suppliers\Models\Supplier::class,
-        ]
+        ],
+       
     ],
 
     /*

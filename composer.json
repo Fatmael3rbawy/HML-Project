@@ -33,7 +33,8 @@
 
             "Admins\\": "app/Modules/Admins/",
             "Suppliers\\": "app/Modules/Suppliers/",
-            "Users\\": "app/Modules/Users/"
+            "Users\\": "app/Modules/Users/",
+
 
         },
         "files":[

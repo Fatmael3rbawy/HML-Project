@@ -4,7 +4,10 @@ function getModuleName($moduleName)
 {
     return app_path('Modules' . DS() . $moduleName . DS());
 }
-
+function loadConfigFile($fileName, $moduleName)
+{
+    return getModuleName($moduleName) . 'config' . DS() . $fileName . '.php';
+}
 function loadRoutes($moduleName, $fileName)
 {
     return (getModuleName($moduleName) . 'routes' . DS() . $fileName . '.php');

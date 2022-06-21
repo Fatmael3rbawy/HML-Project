@@ -14,4 +14,13 @@ class Admin extends Authenticable
     {
        return $this->hasMany(Category::class);
     }
+    public function deleteNews()
+    {
+        return $this->hasMany(NewsFeed::class, 'deleted_by')->withTrashed();
+    }
+
+    public function createNews()
+    {
+        return $this->hasMany(NewsFeed::class, 'created_by')->withTrashed();
+    }
 }

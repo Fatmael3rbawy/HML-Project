@@ -1,6 +1,7 @@
 <?php
 
 use Admins\Http\Controllers\LoginController;
+use Admins\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,9 +31,13 @@ Route::group(['namespace' => 'Admins\Http\Controllers', 'prefix' => 'admin' ,'mi
 
         Route::resources([
             'categories' => CategoryController::class,
+            'news' => NewsController::class
         ]);
-        
-        Route::get('/logout',[LoginController::class ,'logout'])->name('logout');
+        Route::as('news.')->group(function () {
+        Route::delete('/trash/{id}' ,[NewsController::class ,'trash'])->name('trash');
+        Route::post('/restore/{id}',[NewsController::class ,'restore'])->name('restore');
+        });
+        Route::post('/logout',[LoginController::class ,'logout'])->name('logout');
     });
 
 });
