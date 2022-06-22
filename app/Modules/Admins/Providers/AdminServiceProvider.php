@@ -2,6 +2,7 @@
 
 namespace Admins\Providers;
 
+use Admins\Models\NewsFeed;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,12 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        view()->composer('Admins::includes.sidebar', function ($view) {
+            $view->with([
+                'newsTrashesCount'  => NewsFeed::onlyTrashed()->count(),
+            ]);
+        });
+
         $moduleName = basename(dirname(__DIR__ ,levels:1));
         $this->loadRoutesFrom(loadRoutes($moduleName, 'web'));
         //$this->loadRoutesFrom(__DIR__.'/../routes/web.php');

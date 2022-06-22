@@ -114,7 +114,7 @@
                                 <span class="sidenav-normal"> Recycle bin
                                     <span class="m-menu__link-badge">
                                         <span class="m-badge m-badge--danger" id="module-admins">
-                                            {{-- {{$adminTrashesCount}} --}}
+                                            {{$newsTrashesCount}}
                                         </span>
                                     </span>
                                 </span>

@@ -29,16 +29,12 @@
     <br>
     @if (session('success'))
         <div class='alert alert-success'>
-            <h6>
-                <center>{{ session('success') }}</center>
-            </h6>
+                <strong>Success:</strong> {{Session('success')}}
         </div>
-    @endif
-    @if (session('error'))
+    
+    @elseif (session('error'))
         <div class='alert alert-danger'>
-            <h6>
-                <center>{{ session('error') }}</center>
-            </h6>
+            <strong>Error:</strong> {{Session('error')}}
         </div>
     @endif
     @yield('content')
@@ -452,6 +448,13 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+    </script>
+    <script>
+        $("document").ready(function(){
+            $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+                $(".alert").slideUp(500);
+            });
+        });
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

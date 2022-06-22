@@ -152,4 +152,9 @@ class NewsController extends Controller
             return back()->with('error', 'Failed, Please try again later.');
         }
     }
+
+    private function countTrashes()
+    {
+        return NewsFeed::onlyTrashed()->count();
+    }
 }

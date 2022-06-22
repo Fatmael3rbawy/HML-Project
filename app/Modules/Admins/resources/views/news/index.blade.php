@@ -12,7 +12,11 @@
                     <div class="card-header pb-0">
                         <div class="d-lg-flex">
                             <div>
+                                @if (request()->query('view') != 'trash')
                                 <h5 class="mb-0">All News</h5>
+                                @else
+                                <h5 class="mb-0">All Trashed News</h5>
+                                @endif
                             </div>
                             <div class="ms-auto my-auto mt-lg-0 mt-4">
                                 <div class="ms-auto my-auto">
